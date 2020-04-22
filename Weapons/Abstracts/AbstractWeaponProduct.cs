@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType {Sword, Axe , Dagger ,Magic }
+public enum WeaponType {Sword, Axe , Dagger ,Magic, Undefined }
 
 public abstract class AbstractWeaponProduct 
 {
-    public GameObject gameObject { get; protected set; } // Weapon GO made from prefab
-    public int damage { get; protected set; } // TODO make more stats , evan aray
+    public GameObject gameObject { get; protected set; } // Weapon GO attached to this script
+                                                         //public int damage { get; protected set; } // TODO make more stats , evan aray
+    protected Hashtable itemStats = new Hashtable();
 
-    public  void Instantiate(WeaponType weaponType)
+    public virtual void Instantiate(WeaponType weaponType)
     {
-        gameObject = GameObject.
+        gameObject = new GameObject();
+        itemStats.Add("Type", WeaponType.Undefined);
+        itemStats.Add("Name", "");
+        itemStats.Add("Damage", 0);
+        itemStats.Add("AttackRate", 0.0f); //attack speed
+        itemStats.Add("SpritePath", "");
+        itemStats.Add("IconPath", "");
     }
 
-    public void CombineWith(AbstractWeaponProduct other)
+    public virtual void CombineWith(AbstractWeaponProduct other)
     {
         // prevent self interaction
         if (other == this)
@@ -22,9 +29,11 @@ public abstract class AbstractWeaponProduct
 
         if (other.gameObject == null)
             return;
-
-        this.damage += (int)(0.1f * other.damage);
+        
+        //this.damage += (int)(0.1f * other.damage);
         GameObject.Destroy(other.gameObject);
         other = null;
     }
+
+    public virtual void Attack(Vector3 currentPosition,Vector2 attackDirection) { } // position where to spawn weapon
 }

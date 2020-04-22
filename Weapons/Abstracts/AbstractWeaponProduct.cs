@@ -8,17 +8,21 @@ public abstract class AbstractWeaponProduct
 {
     public GameObject gameObject { get; protected set; } // Weapon GO attached to this script
                                                          //public int damage { get; protected set; } // TODO make more stats , evan aray
+    protected SpriteRenderer spriteRenderer;
     protected Hashtable itemStats = new Hashtable();
 
     public virtual void Instantiate(WeaponType weaponType)
     {
-        gameObject = new GameObject();
+        gameObject = GameObject.Instantiate(Resources.Load<GameObject>("Sprites/Weapons/WeaponBase"));
         itemStats.Add("Type", WeaponType.Undefined);
         itemStats.Add("Name", "");
         itemStats.Add("Damage", 0);
         itemStats.Add("AttackRate", 0.0f); //attack speed
         itemStats.Add("SpritePath", "");
         itemStats.Add("IconPath", "");
+        //go add abstract weapon product. go.awp = this;
+
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     public virtual void CombineWith(AbstractWeaponProduct other)
@@ -36,4 +40,11 @@ public abstract class AbstractWeaponProduct
     }
 
     public virtual void Attack(Vector3 currentPosition,Vector2 attackDirection) { } // position where to spawn weapon
+
+    public virtual void Update() { }
+
+    public float GetAttackRate()
+    {
+        return (float)itemStats["AttackRate"];
+    }
 }

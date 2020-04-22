@@ -7,8 +7,9 @@ public class PlayerAttacks : MonoBehaviour
     public Player player;
     public Joystick joystick;
 
-    public Vector2 attackDir;
-    public Transform transform;
+    private Vector2 attackDir;
+    float nextAttackTime;
+    private Transform transform;
 
     private void Start()
     {
@@ -19,11 +20,16 @@ public class PlayerAttacks : MonoBehaviour
     {
         attackDir.x = joystick.Horizontal;
         attackDir.y = joystick.Vertical;
-        if(attackDir.sqrMagnitude != 0)
+        if (Time.time >= nextAttackTime)
         {
-            Vector3 currentPosition = transform.position;
-            
-            player.equipedWeapon.Attack(currentPosition ,attackDir);
+            if (attackDir.sqrMagnitude != 0)
+            {
+                Vector3 currentPosition = new Vector3(transform.position.x, transform.position.y + 2, 0);
+
+                //check attack speed stat
+                player.equipedWeapon.Attack(currentPosition, attackDir);
+                nextAttackTime = Time.time + 1f / player.equipedWeapon.GetAttackRate();
+            }
         }
     }
 }

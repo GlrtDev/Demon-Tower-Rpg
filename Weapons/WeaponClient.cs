@@ -32,4 +32,9 @@ public class WeaponClient
             default: return;
         }
     }
+
+    public AbstractWeaponProduct ReturnAllWeapons()
+    {
+        return axesProducts[0]; // THIS IS TEST, REturn just first axe
+    }
 }

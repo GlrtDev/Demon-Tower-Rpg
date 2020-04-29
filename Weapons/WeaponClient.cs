@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponClient
 {
+    // maybe change to single list
     private List<Sword> swordsProducts = new List<Sword>();
     private List<Axe> axesProducts = new List<Axe>();
     private List<Dagger> daggerProducts = new List<Dagger>();
@@ -24,8 +25,10 @@ public class WeaponClient
                 axesProducts.Add(factory.CreateAxe(rarity, level));
                 break;
             case WeaponType.Sword:
+                swordsProducts.Add(factory.CreateSword(rarity, level));
                 break;
             case WeaponType.Dagger:
+                daggerProducts.Add(factory.CreateDagger(rarity, level));
                 break;
             case WeaponType.Magic:
                 break;
@@ -33,8 +36,13 @@ public class WeaponClient
         }
     }
 
-    public AbstractWeaponProduct ReturnAllWeapons()
+    public IEnumerable<AbstractWeaponProduct> ReturnAllWeapons()
     {
-        return axesProducts[0]; // THIS IS TEST, REturn just first axe
+        List<AbstractWeaponProduct> allWeapons = new List<AbstractWeaponProduct>();
+        allWeapons.AddRange(swordsProducts);
+        allWeapons.AddRange(axesProducts);
+        allWeapons.AddRange(daggerProducts);
+        //allWeapons.AddRange(swordsProducts);
+        return allWeapons; 
     }
 }

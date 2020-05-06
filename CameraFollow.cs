@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     {
         iTween.MoveUpdate(gameObject,iTween.Hash( 
             "x" ,followTarget.transform.position.x,
-            "y", followTarget.transform.position.y,
+            "y", followTarget.transform.position.y+1,
             "time" ,1.5f));
     }
 }

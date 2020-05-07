@@ -11,7 +11,7 @@ public class Sword : MeleeWeapon
         itemStats["Type"] = WeaponType.Sword;
         itemStats["WeaponNumber"] = Number;
         itemStats["Rarity"] = rarity;
-        itemStats["Name"] = "swor"; // TO DO name generator
+        itemStats["Name"] = WeaponNames[(int)WeaponType.Sword, Number * 2 + rarity];
         itemStats["Damage"] = 7 + ((0.35f * rarity) * level) + (level * 1);
         itemStats["AttackRate"] = 1.1f + (level * 0.01f);
         itemStats["SpritePath"] = "Sprites/Weapons/Swords/sword" + Number + "-" + rarity + "-level" + itemStats["WeaponLevel"];

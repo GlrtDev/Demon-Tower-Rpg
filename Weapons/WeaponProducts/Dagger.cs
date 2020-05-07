@@ -11,9 +11,9 @@ public class Dagger : MeleeWeapon
         itemStats["Type"] = WeaponType.Dagger;
         itemStats["WeaponNumber"] = Number;
         itemStats["Rarity"] = rarity;
-        itemStats["Name"] = "dagg"; // TO DO name generator
+        itemStats["Name"] = WeaponNames[(int)WeaponType.Dagger, Number * 2 + rarity];
         itemStats["Damage"] = 3 + ((0.35f * rarity) * level) + (level * 1);
-        itemStats["AttackRate"] = 1.7f + (level * 0.03f);
+        itemStats["AttackRate"] = 0;
         itemStats["SpritePath"] = "Sprites/Weapons/Daggers/dagger" + Number + "-" + rarity + "-level" + itemStats["WeaponLevel"];
         itemStats["IconPath"] = ""; // TO DO icons
         itemStats["trailStartColXY"] = new Vector2Int(27, 85);

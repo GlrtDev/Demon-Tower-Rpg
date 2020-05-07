@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType {Sword, Axe , Dagger ,Magic, Undefined }
 
-public abstract class AbstractWeaponProduct 
+public abstract class AbstractWeaponProduct
 {
     public GameObject gameObject { get; protected set; } // Weapon GO attached to this script
                                                          //public int damage { get; protected set; } // TODO make more stats , evan aray
@@ -23,7 +23,7 @@ public abstract class AbstractWeaponProduct
         itemStats.Add("WeaponLevel", 0);
         itemStats.Add("Rarity", 0);
         itemStats.Add("WeaponNumber", 0);
-        itemStats.Add("SpritePath", "");
+        itemStats.Add("SpritePath", "Sprites/Weapons/unknown");
         itemStats.Add("IconPath", "");
         itemStats.Add("CrackPath", "Prefabs/groundCrack");
         itemStats.Add("PrefabPath", "Prefabs/WeaponBase");
@@ -49,6 +49,8 @@ public abstract class AbstractWeaponProduct
             trailRenderer.endColor = spriteRenderer.sprite.texture.GetPixel(((Vector2Int)itemStats["trailEndColXY"]).x, ((Vector2Int)itemStats["trailEndColXY"]).y); //bad
             trailRenderer.widthMultiplier = (float)itemStats["trailWidth"];
         }
+        else if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
 
     }
     public virtual void CombineWith(AbstractWeaponProduct other)
@@ -59,13 +61,13 @@ public abstract class AbstractWeaponProduct
 
         if (other.gameObject == null)
             return;
-        
+
         //this.damage += (int)(0.1f * other.damage);
         GameObject.Destroy(other.gameObject);
         other = null;
     }
 
-    public virtual void Attack(Vector3 currentPosition,Vector2 attackDirection) { } // position where to spawn weapon
+    public virtual void Attack(Vector3 currentPosition, Vector2 attackDirection) { } // position where to spawn weapon
 
     public virtual void Update() { }
 
@@ -74,4 +76,19 @@ public abstract class AbstractWeaponProduct
         return (float)itemStats["AttackRate"];
     }
 
+    public Hashtable GetStats()
+    {
+        return itemStats;
+    }
+
+    public void OnHit()
+    {
+        //do some extr stuff!
+    }
+
+    public static readonly string[,] WeaponNames = { { "Broken Sword" ,"Faithful Sword", "Iron Sabre", "Magic Infused Blade" },
+                                                     { "Wood Axe","","","" },
+                                                     { "Broken Razor","Throwing Knife","","" },
+                                                     { "","","","" }};
 }
+

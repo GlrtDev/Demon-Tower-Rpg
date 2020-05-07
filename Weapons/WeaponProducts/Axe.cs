@@ -9,13 +9,13 @@ public class Axe : MeleeWeapon
         int Number = (level / 10 ) % 10;
         base.Instantiate(WeaponType.Axe);
         itemStats["Type"] = WeaponType.Axe;
-        itemStats["Name"] = "axe"; // TO DO name generator
+        itemStats["Name"] = WeaponNames[(int) WeaponType.Axe, Number*2 +rarity]; // TO DO name generator
         itemStats["Damage"] = 10 + ((0.4f * rarity) * level) + (level * 1);
         itemStats["AttackRate"] = 1 + (level * 0.01f);
         itemStats["SpritePath"] = "Sprites/Weapons/Axes/axe" + Number + "-" + rarity + "-level0";
         itemStats["IconPath"] = ""; // TO DO icons
-        itemStats["trailStartCol"] = new Vector2Int(16, 87);
-        itemStats["trailEndCol"] = new Vector2Int(20, 87);
+        itemStats["trailStartColXY"] = new Vector2Int(16, 87);
+        itemStats["trailEndColXY"] = new Vector2Int(20, 87);
         Initialize();
     }
 

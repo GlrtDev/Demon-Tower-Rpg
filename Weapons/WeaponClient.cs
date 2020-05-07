@@ -12,6 +12,9 @@ public class WeaponClient
 
     private AbstractWeaponFactory factory;
 
+    public AbstractWeaponProduct equipedWeapon;
+    private AbstractWeaponProduct[] selectedWeapons = new AbstractWeaponProduct[2];
+
     public WeaponClient(AbstractWeaponFactory factory)
     {
         this.factory = factory;
@@ -44,5 +47,13 @@ public class WeaponClient
         allWeapons.AddRange(daggerProducts);
         //allWeapons.AddRange(swordsProducts);
         return allWeapons; 
+    }
+
+    public void EquipWeapon( AbstractWeaponProduct weapon)
+    {
+        var otherWeapons = ReturnAllWeapons();
+        foreach (AbstractWeaponProduct otherWeapon in otherWeapons)
+            otherWeapon.gameObject.SetActive(false);
+        equipedWeapon = weapon;
     }
 }

@@ -19,6 +19,7 @@ public class Sword : MeleeWeapon
         itemStats["trailStartColXY"] = new Vector2Int(27, 85);
         itemStats["trailEndColXY"] = new Vector2Int(27, 70);
         itemStats["trailWidth"] = 0.16f + (int)itemStats["WeaponLevel"] * 0.02f; // wpn level
+        itemStats["PrefabPath"] = "Prefabs/SwordBase";
         Initialize();
     }
 

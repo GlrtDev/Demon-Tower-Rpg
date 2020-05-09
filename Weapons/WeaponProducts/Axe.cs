@@ -16,6 +16,7 @@ public class Axe : MeleeWeapon
         itemStats["IconPath"] = ""; // TO DO icons
         itemStats["trailStartColXY"] = new Vector2Int(16, 87);
         itemStats["trailEndColXY"] = new Vector2Int(20, 87);
+        itemStats["PrefabPath"] = "Prefabs/AxeBase";
         Initialize();
     }
 

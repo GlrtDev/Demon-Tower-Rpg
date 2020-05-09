@@ -14,12 +14,19 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     public Animator animator;
 
+    private void Start()
+    {
+        joystick =  GameObject.Find("Fixed Move Joystick").GetComponent<Joystick>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        float spd = movement.sqrMagnitude;
+        animator.SetFloat("Speed", spd);
+        animator.SetFloat("AnimationMvntSpeed", 0.4f + 0.6f * spd);
         if (movement.x != 0)
         {
             if (movement.x > 0)

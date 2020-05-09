@@ -14,6 +14,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private void Start()
     {
+        joystick = GameObject.Find("Fixed Attack Joystick").GetComponent<Joystick>();
         transform = gameObject.transform;
     }
 
